@@ -24,6 +24,7 @@ import org.wahlzeit.services.SessionManager;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.services.SysSession;
 
+
 /**
  * A superclass for a Main class for system startup and shutdown.
  */
