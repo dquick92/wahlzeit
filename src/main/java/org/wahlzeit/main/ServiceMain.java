@@ -85,6 +85,10 @@ public class ServiceMain extends ModelMain {
 		return instance.isInProduction;
 	}
 
+	public void setIsInProduction(boolean value){
+		instance.isInProduction = value;
+	}
+
 	/**
 	 *
 	 */

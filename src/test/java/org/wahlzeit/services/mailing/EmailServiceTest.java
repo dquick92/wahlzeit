@@ -20,6 +20,7 @@
 package org.wahlzeit.services.mailing;
 
 import junit.framework.TestCase;
+import org.wahlzeit.main.ServiceMain;
 import org.wahlzeit.services.EmailAddress;
 
 /**
@@ -45,6 +46,7 @@ public class EmailServiceTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
+        ServiceMain.getInstance().setIsInProduction(false);
 		emailService = EmailServiceManager.getDefaultService();
 
 		validAddress = EmailAddress.getFromString("test@test.de");
@@ -53,6 +55,7 @@ public class EmailServiceTest extends TestCase {
 	/**
 	 *
 	 */
+//	@Test
 	public void testSendInvalidEmail() {
 		try {
 			assertFalse(emailService.sendEmailIgnoreException(validAddress, null, "lol", "hi"));
@@ -66,6 +69,7 @@ public class EmailServiceTest extends TestCase {
 	/**
 	 *
 	 */
+//	@Test
 	public void testSendValidEmail() {
 		try {
 			assertTrue(emailService.sendEmailIgnoreException(validAddress, validAddress, "hi", "test"));
