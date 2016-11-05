@@ -45,7 +45,7 @@ public class CoordinateTest {
         assertTrue(tmpCoord.getDistance(25.321, -50.432) > 0);
 
         //sample point with given result
-        assertEquals(4102177.0697, tmpCoord.getDistance(-171.1234, -83.4321), 0.1);
+        assertEquals(10258, tmpCoord.getDistance(-171.1234, -83.4321), 1);
     }
 
 

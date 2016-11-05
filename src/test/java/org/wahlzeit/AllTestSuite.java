@@ -11,7 +11,6 @@ import org.wahlzeit.model.persistence.GcsAdapterTest;
 import org.wahlzeit.services.EmailAddressTest;
 import org.wahlzeit.services.LogBuilderTest;
 import org.wahlzeit.services.mailing.EmailServiceTest;
-import org.wahlzeit.testEnvironmentProvider.*;
 import org.wahlzeit.utils.StringUtilTest;
 import org.wahlzeit.utils.VersionTest;
 
@@ -38,12 +37,6 @@ public final class AllTestSuite {
         suite.addTest(new JUnit4TestAdapter(EmailServiceTest.class));
         suite.addTest(new JUnit4TestAdapter(EmailAddressTest.class));
         suite.addTest(new JUnit4TestAdapter(LogBuilderTest.class));
-        suite.addTest(new JUnit4TestAdapter(LocalDatastoreServiceTestConfigProvider.class));
-        suite.addTest(new JUnit4TestAdapter(RegisteredOfyEnvironmentProvider.class));
-        suite.addTest(new JUnit4TestAdapter(SysConfigProvider.class));
-        suite.addTest(new JUnit4TestAdapter(UserServiceProvider.class));
-        suite.addTest(new JUnit4TestAdapter(UserServiceProvider.class));
-        suite.addTest(new JUnit4TestAdapter(WebFormHandlerProvider.class));
         suite.addTest(new JUnit4TestAdapter(StringUtilTest.class));
         suite.addTest(new JUnit4TestAdapter(VersionTest.class));
 

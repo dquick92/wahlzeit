@@ -7,7 +7,7 @@ package org.wahlzeit.model;
 
 public class Coordinate {
 
-    static final int EARTH_RADIUS = 6371000;
+    public static final int EARTH_RADIUS = 6371;
 
 
     private double latitude;
@@ -47,20 +47,25 @@ public class Coordinate {
      *using the Vincenty Formula with the atan2-Function to preserver large rounding numbers
      *source: https://en.wikipedia.org/wiki/Great-circle_distance
      *
-     * return: distance between this coordinate and the other coordinate in meters
+     *return: distance between this coordinate and the other coordinate in kilometers
      */
     public double getDistance(double latitudeOtherPoint, double longitudeOtherPoint){
-        double deltaLambda = Math.abs(this.longitude-longitudeOtherPoint);
+        double radLongitude = Math.toRadians(this.longitude);
+        double radOtherLongitude = Math.toRadians(longitudeOtherPoint);
+        double radLatitude = Math.toRadians(this.latitude);
+        double radOtherLatitude = Math.toRadians(latitudeOtherPoint);
 
-        double numeratorFirstTerm = Math.cos(latitudeOtherPoint)*Math.sin(deltaLambda);
-        double numeratorSecondTerm = Math.cos(this.latitude)*Math.sin(latitudeOtherPoint)-
-                Math.sin(this.latitude)*Math.cos(latitudeOtherPoint)*Math.cos(deltaLambda);
+        double deltaLambda = Math.abs(radLongitude-radOtherLongitude);
+
+        double numeratorFirstTerm = Math.cos(radOtherLatitude)*Math.sin(deltaLambda);
+        double numeratorSecondTerm = Math.cos(radLatitude)*Math.sin(radOtherLatitude)-
+                Math.sin(radLatitude)*Math.cos(radOtherLatitude)*Math.cos(deltaLambda);
 
         double atan2Y = Math.sqrt(numeratorFirstTerm*numeratorFirstTerm+
                 numeratorSecondTerm*numeratorSecondTerm);
 
-        double atan2X = Math.sin(this.latitude)*Math.sin(latitudeOtherPoint)+
-                Math.cos(this.latitude)*Math.cos(latitudeOtherPoint)*Math.cos(deltaLambda);
+        double atan2X = Math.sin(radLatitude)*Math.sin(radOtherLatitude)+
+                Math.cos(radLatitude)*Math.cos(radOtherLatitude)*Math.cos(deltaLambda);
 
         //error case, Vincenties function undefined
         if (atan2Y == 0 && atan2X == 0){
