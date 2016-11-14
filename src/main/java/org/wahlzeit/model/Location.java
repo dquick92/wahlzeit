@@ -1,10 +1,12 @@
 package org.wahlzeit.model;
 
+import java.io.Serializable;
+
 /**
  * Created on 28.10.16.
  */
 
-public class Location {
+public class Location implements Serializable{
 
     public Coordinate coordinate;
 

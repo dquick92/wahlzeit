@@ -1,11 +1,13 @@
 package org.wahlzeit.model;
 
 
+import java.io.Serializable;
+
 /**
  * Created on 28.10.16.
  */
 
-public class Coordinate {
+public class Coordinate implements Serializable{
 
     public static final int EARTH_RADIUS = 6371;
 
