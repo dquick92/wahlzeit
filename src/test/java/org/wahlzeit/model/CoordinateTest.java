@@ -4,48 +4,68 @@ package org.wahlzeit.model;
  * Created on 28.10.16.
  */
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class CoordinateTest {
 
     @Test
-    public void testSetLatitude() {
-        Coordinate tmpCoord = new Coordinate();
-        tmpCoord.setLatitude(5.4321);
-        assertEquals(5.4321, tmpCoord.getLatitude(), 0);
+    public void testSphericToCartesian() throws Exception{
+        SphericCoordinate sC = new SphericCoordinate(45, 0, 90);
+        CartesianCoordinate cC = new CartesianCoordinate(63.6,0,63.6);
+        CartesianCoordinate tC = sC.asCartesian();
+        assertEquals(cC.getX(), tC.getX(), 0.1);
+        assertEquals(cC.getY(), tC.getY(), 0.1);
+        assertEquals(cC.getZ(), tC.getZ(), 0.1);
+
     }
 
     @Test
-    public void testSetLongitude(){
-        Coordinate tmpCoord = new Coordinate();
-        tmpCoord.setLongitude(5.1234);
-        assertEquals(5.1234, tmpCoord.getLongitude(),0);
+    public void testGetDistanceSphericSameRadius() {
+        try {
+            Coordinate sC1 = new SphericCoordinate(-90, -180, 5);
+            Coordinate sC2 = new SphericCoordinate(90, 180, 5);
+            assertEquals(15.7, sC1.getDistance(sC2), 0.01);
+        } catch (InvalidArgumentException e) {
+        }
     }
 
     @Test
-    public void testConstructor(){
-        Coordinate tmpCoord = new Coordinate(5.4321,5.1234);
-        assertEquals(5.1234, tmpCoord.getLongitude(),0);
-        assertEquals(5.4321, tmpCoord.getLatitude(),0);
+    public void testGetDistanceSphericDifferentRadius() {
+        try {
+            Coordinate sC1 = new SphericCoordinate(-90, -180, 1);
+            Coordinate sC2 = new SphericCoordinate(90, 180, 5);
+            assertEquals(6, sC1.getDistance(sC2), 0.01);
+        } catch (InvalidArgumentException e) {
+        }
     }
 
     @Test
-    public void testGetDistance(){
+    public void testGetDistanceCartesianImplementation(){
+        Coordinate cC1 = new CartesianCoordinate(0,0,0);
+        Coordinate cC2 = new CartesianCoordinate(10,10,10);
+        assertEquals(17.32, cC1.getDistance(cC2), 0.001);
 
-        Coordinate tmpCoord = new Coordinate(5.4321,5.1234);
+    }
+    @Test
+    public void testGetDistanceDifferentImplementation() throws InvalidArgumentException {
+            Coordinate sC = new SphericCoordinate(45,45,100);
+            Coordinate cC = new CartesianCoordinate(5,5,-5);
+            assertEquals(99, sC.getDistance(cC), 0.1);
+    }
 
-        //same point, should be 0
-        assertEquals(0, tmpCoord.getDistance(tmpCoord), 0);
+    @Test
+    public void testInterchangeability() throws InvalidArgumentException {
+        Coordinate sC = new SphericCoordinate(1,1,10);
+        Coordinate cC = sC;
+        sC = ((SphericCoordinate)cC).asCartesian();
+        assertTrue(sC instanceof CartesianCoordinate);
+        cC = sC;
+        assertTrue(sC instanceof CartesianCoordinate);
 
-        //random point, distance must be > 0
-        assertTrue(tmpCoord.getDistance(25.321, -50.432) > 0);
-
-        //sample point with given result
-        assertEquals(10258, tmpCoord.getDistance(-171.1234, -83.4321), 1);
     }
 
 

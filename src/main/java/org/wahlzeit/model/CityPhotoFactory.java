@@ -13,8 +13,6 @@ public class CityPhotoFactory extends PhotoFactory {
         getInstance();
     }
 
-    ;
-
     public static synchronized CityPhotoFactory getInstance() {
         if (instance == null) {
 

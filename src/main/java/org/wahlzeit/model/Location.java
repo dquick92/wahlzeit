@@ -18,10 +18,6 @@ public class Location implements Serializable{
         this.coordinate = coordinate;
     }
 
-    public Location(double latitude, double longitude){
-        this.coordinate = new Coordinate(latitude, longitude);
-    }
-
     public void setCoordinate(Coordinate coordinate){
         this.coordinate = coordinate;
     }
