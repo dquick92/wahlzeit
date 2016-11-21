@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Created on 28.10.16.
  */
 
-public class SphericCoordinate implements Coordinate{
+public class SphericCoordinate implements Serializable,Coordinate{
 
     public static final int EARTH_RADIUS = 6371;
 

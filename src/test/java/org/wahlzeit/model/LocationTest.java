@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class LocationTest {
 
-    public Coordinate tmpCoordinate;
+    public SphericCoordinate tmpCoordinate;
 
     @Before
     public void setTmpCoordinate() throws IllegalArgumentException {

@@ -8,21 +8,21 @@ import java.io.Serializable;
 
 public class Location implements Serializable{
 
-    public Coordinate coordinate;
+    public SphericCoordinate coordinate = new SphericCoordinate(0,0,SphericCoordinate.EARTH_RADIUS);
 
     public Location(){
         this.coordinate = null;
     }
 
-    public Location(Coordinate coordinate) {
+    public Location(SphericCoordinate coordinate) {
         this.coordinate = coordinate;
     }
 
-    public void setCoordinate(Coordinate coordinate){
+    public void setCoordinate(SphericCoordinate coordinate){
         this.coordinate = coordinate;
     }
 
-    public Coordinate getCoordinate(){
+    public SphericCoordinate getCoordinate(){
         return this.coordinate;
     }
 

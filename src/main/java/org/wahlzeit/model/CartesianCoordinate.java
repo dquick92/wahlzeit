@@ -1,11 +1,9 @@
 package org.wahlzeit.model;
 
-import java.util.Vector;
+import java.io.Serializable;
 
-/**
- * Created by daniel on 14.11.16.
- */
-public class CartesianCoordinate implements Coordinate{
+
+public class CartesianCoordinate implements Serializable,Coordinate{
 
     private double x = 0,y = 0,z = 0;
 
