@@ -4,7 +4,6 @@ package org.wahlzeit.model;
  * Created on 28.10.16.
  */
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -25,22 +24,16 @@ public class CoordinateTest {
 
     @Test
     public void testGetDistanceSphericSameRadius() {
-        try {
             Coordinate sC1 = new SphericCoordinate(-90, -180, 5);
             Coordinate sC2 = new SphericCoordinate(90, 180, 5);
             assertEquals(15.7, sC1.getDistance(sC2), 0.01);
-        } catch (InvalidArgumentException e) {
-        }
     }
 
     @Test
     public void testGetDistanceSphericDifferentRadius() {
-        try {
             Coordinate sC1 = new SphericCoordinate(-90, -180, 1);
             Coordinate sC2 = new SphericCoordinate(90, 180, 5);
             assertEquals(6, sC1.getDistance(sC2), 0.01);
-        } catch (InvalidArgumentException e) {
-        }
     }
 
     @Test
@@ -51,14 +44,14 @@ public class CoordinateTest {
 
     }
     @Test
-    public void testGetDistanceDifferentImplementation() throws InvalidArgumentException {
+    public void testGetDistanceDifferentImplementation() throws IllegalArgumentException {
             Coordinate sC = new SphericCoordinate(45,45,100);
             Coordinate cC = new CartesianCoordinate(5,5,-5);
             assertEquals(99, sC.getDistance(cC), 0.1);
     }
 
     @Test
-    public void testInterchangeability() throws InvalidArgumentException {
+    public void testInterchangeability() throws IllegalArgumentException {
         Coordinate sC = new SphericCoordinate(1,1,10);
         Coordinate cC = sC;
         sC = ((SphericCoordinate)cC).asCartesian();

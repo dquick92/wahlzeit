@@ -3,7 +3,6 @@ package org.wahlzeit.model;
 /**
  * Created on 28.10.16.
  */
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,12 +15,12 @@ public class LocationTest {
     public Coordinate tmpCoordinate;
 
     @Before
-    public void setTmpCoordinate() throws InvalidArgumentException {
+    public void setTmpCoordinate() throws IllegalArgumentException {
         tmpCoordinate = new SphericCoordinate(5.4321, 5.1234, SphericCoordinate.EARTH_RADIUS);
     }
 
     @Test
-    public void testGetDistance() throws InvalidArgumentException {
+    public void testGetDistance() throws IllegalArgumentException {
         Location tmpLocation = new Location(tmpCoordinate);
 
         //same Location, must be 0

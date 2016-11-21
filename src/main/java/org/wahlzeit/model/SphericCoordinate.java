@@ -1,17 +1,16 @@
 package org.wahlzeit.model;
 
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
+
 
 import java.io.Serializable;
-import java.util.Vector;
 
 
 /**
  * Created on 28.10.16.
  */
 
-public class SphericCoordinate implements Serializable, Coordinate{
+public class SphericCoordinate implements Coordinate{
 
     public static final int EARTH_RADIUS = 6371;
 
@@ -27,9 +26,9 @@ public class SphericCoordinate implements Serializable, Coordinate{
     }
 
     public SphericCoordinate(double latitude, double longitude, double radius) throws
-        InvalidArgumentException{
+            IllegalArgumentException {
         if (Math.abs(latitude) > 90 || Math.abs(longitude) > 180 || radius < 0 )
-            throw new InvalidArgumentException(null);
+            throw new IllegalArgumentException();
 
         this.latitude = latitude;
         this.longitude = longitude;
@@ -40,9 +39,9 @@ public class SphericCoordinate implements Serializable, Coordinate{
         return this.latitude;
     }
 
-    public void setLatitude(double latitude) throws InvalidArgumentException{
+    public void setLatitude(double latitude) throws IllegalArgumentException{
         if (Math.abs(latitude) > 90)
-            throw new InvalidArgumentException(null);
+            throw new IllegalArgumentException();
 
         this.latitude = latitude;
     }
@@ -51,15 +50,15 @@ public class SphericCoordinate implements Serializable, Coordinate{
         return this.longitude;
     }
 
-    public void setLongitude(double longitude) throws InvalidArgumentException {
+    public void setLongitude(double longitude) throws IllegalArgumentException {
         if (Math.abs(longitude) > 90)
-            throw new InvalidArgumentException(null);
+            throw new IllegalArgumentException();
         this.longitude = longitude;
     }
 
-    public void setRadius(double radius) throws InvalidArgumentException {
+    public void setRadius(double radius) throws IllegalArgumentException {
         if (radius < 0)
-            throw new InvalidArgumentException(null);
+            throw new IllegalArgumentException();
 
         this.radius = radius;
     }

@@ -1,7 +1,5 @@
 package org.wahlzeit.model;
 
-import java.util.Vector;
-
 public interface Coordinate {
 
     /**
