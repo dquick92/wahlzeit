@@ -10,4 +10,7 @@ public interface Coordinate {
      */
     double getDistance(Coordinate otherPoint);
 
+    boolean isEqual(Coordinate otherPoint);
+
+
 }

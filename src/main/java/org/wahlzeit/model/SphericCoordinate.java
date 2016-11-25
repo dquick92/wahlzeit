@@ -3,14 +3,14 @@ package org.wahlzeit.model;
 
 
 
-import java.io.Serializable;
+import java.util.Vector;
 
 
 /**
  * Created on 28.10.16.
  */
 
-public class SphericCoordinate implements Serializable,Coordinate{
+public class SphericCoordinate extends AbstractCoordinate{
 
     public static final int EARTH_RADIUS = 6371;
 
@@ -66,11 +66,15 @@ public class SphericCoordinate implements Serializable,Coordinate{
     public double getRadius(){ return this.radius; }
 
     /**
-     *
+     * get the Coordinate as Cartesian Vector Interpretation
      * @methodtype get
      */
-    public CartesianCoordinate asCartesian(){
-        return new CartesianCoordinate(this.calcX(), this.calcY(), this.calcZ());
+    public Vector<Double> asVector(){
+        Vector<Double> ret = new Vector<>();
+        ret.addElement(calcX());
+        ret.addElement(calcY());
+        ret.addElement(calcZ());
+        return ret;
     }
 
     /**
@@ -102,8 +106,9 @@ public class SphericCoordinate implements Serializable,Coordinate{
      *
      * @methodtype get
      */
+    @Override
     public double getDistance(Coordinate otherPoint) {
-
+        assertNotNull(otherPoint);
         //if otherPoint is a spheric coordinate:
         //  -- test for radius, if equal: return circular distance
         if (otherPoint instanceof SphericCoordinate) {
@@ -114,7 +119,7 @@ public class SphericCoordinate implements Serializable,Coordinate{
         }
 
         //all other cases: return direct distance
-        return this.asCartesian().getDistance(otherPoint);
+        return super.getDistance(otherPoint);
     }
 
 
@@ -125,11 +130,10 @@ public class SphericCoordinate implements Serializable,Coordinate{
      *
      *@return distance between this coordinate and the other coordinate in kilometers
      *
-     *@methodtype get
-     *@methodproperties primitive
+     *@methodtype primitive
      *
      */
-    public double doGetDistance(SphericCoordinate otherPoint){
+    protected double doGetDistance(SphericCoordinate otherPoint){
         double radLongitude = Math.toRadians(this.longitude);
         double radOtherLongitude = Math.toRadians(otherPoint.getLongitude());
         double radLatitude = Math.toRadians(this.latitude);

@@ -1,9 +1,9 @@
 package org.wahlzeit.model;
 
-import java.io.Serializable;
 
+import java.util.Vector;
 
-public class CartesianCoordinate implements Serializable,Coordinate{
+public class CartesianCoordinate extends AbstractCoordinate {
 
     private double x = 0,y = 0,z = 0;
 
@@ -11,6 +11,16 @@ public class CartesianCoordinate implements Serializable,Coordinate{
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public CartesianCoordinate(Vector<Double> v) throws IllegalArgumentException{
+        try {
+            this.x = v.get(0);
+            this.y = v.get(1);
+            this.z = v.get(2);
+        }catch(Exception e){
+            throw new IllegalArgumentException();
+        }
     }
 
     public double getX(){
@@ -25,36 +35,13 @@ public class CartesianCoordinate implements Serializable,Coordinate{
         return z;
     }
 
-    /**
-     *
-     * @methodtype get
-     */
-    public double getDistance(Coordinate otherPoint){
-
-        CartesianCoordinate other;
-
-        if (otherPoint instanceof SphericCoordinate)
-            other = ((SphericCoordinate)otherPoint).asCartesian();
-        else
-            other = (CartesianCoordinate) otherPoint;
-
-        return this.doGetDistance(other);
+    @Override
+    public Vector<Double> asVector(){
+        Vector<Double> ret = new Vector<>();
+        ret.addElement(x);
+        ret.addElement(y);
+        ret.addElement(z);
+        return ret;
     }
 
-
-    /**
-     * Calculates the direct distance between two coordinates with the formula d = sqrt(dX²+dY²+dZ²)
-     * @return distance between <code>this</code> and <code>other</code>
-     * @methodtype get
-     * @methodproperties primitive
-     */
-    public double doGetDistance(CartesianCoordinate other){
-
-        double xDiff = other.getX()-this.x;
-        double yDiff = other.getY()-this.y;
-        double zDiff = other.getZ()-this.z;
-
-        return Math.sqrt(xDiff*xDiff+yDiff*yDiff+zDiff*zDiff);
-
-    }
 }

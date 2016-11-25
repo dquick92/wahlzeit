@@ -7,7 +7,6 @@ package org.wahlzeit.model;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class CoordinateTest {
 
@@ -15,7 +14,7 @@ public class CoordinateTest {
     public void testSphericToCartesian() throws Exception{
         SphericCoordinate sC = new SphericCoordinate(45, 0, 90);
         CartesianCoordinate cC = new CartesianCoordinate(63.6,0,63.6);
-        CartesianCoordinate tC = sC.asCartesian();
+        CartesianCoordinate tC = new CartesianCoordinate(sC.asVector());
         assertEquals(cC.getX(), tC.getX(), 0.1);
         assertEquals(cC.getY(), tC.getY(), 0.1);
         assertEquals(cC.getZ(), tC.getZ(), 0.1);
@@ -49,17 +48,5 @@ public class CoordinateTest {
             Coordinate cC = new CartesianCoordinate(5,5,-5);
             assertEquals(99, sC.getDistance(cC), 0.1);
     }
-
-    @Test
-    public void testInterchangeability() throws IllegalArgumentException {
-        Coordinate sC = new SphericCoordinate(1,1,10);
-        Coordinate cC = sC;
-        sC = ((SphericCoordinate)cC).asCartesian();
-        assertTrue(sC instanceof CartesianCoordinate);
-        cC = sC;
-        assertTrue(sC instanceof CartesianCoordinate);
-
-    }
-
 
 }
