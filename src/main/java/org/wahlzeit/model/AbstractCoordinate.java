@@ -17,8 +17,13 @@ public abstract class AbstractCoordinate implements Coordinate,Serializable{
 
     public double getDistance(Coordinate otherPoint){
         assertNotNull(otherPoint);
-        return doGetDistance(otherPoint);
+        double ret = doGetDistance(otherPoint);
+        assert ret >= 0;
+        assertClassInvariants();
+        return ret;
+
     }
+
 
     /**
      * tests if the two coordinates represent the same point in a cartesian coordinate system
@@ -26,8 +31,13 @@ public abstract class AbstractCoordinate implements Coordinate,Serializable{
      * @return
      */
     public boolean isEqual(Coordinate otherPoint){
-        return this.asVector().equals(((AbstractCoordinate)otherPoint).asVector());
 
+        assertNotNull(otherPoint);
+
+        boolean ret = this.asVector().equals(((AbstractCoordinate)otherPoint).asVector());
+
+        assertClassInvariants();
+        return ret;
     }
 
     /**
@@ -53,9 +63,32 @@ public abstract class AbstractCoordinate implements Coordinate,Serializable{
         return Math.sqrt(tmp);
     }
 
-    protected void assertNotNull(Coordinate coord) throws NullPointerException{
+    /**
+     * @methodtype assertion
+     */
+    protected void assertNotNull(Coordinate coord) throws IllegalArgumentException{
         if (coord == null)
-            throw new NullPointerException();
+            throw new IllegalArgumentException("The argument must not be null!");
     }
+
+    /**
+     * @methodtype assertion
+     */
+    protected void assertClassInvariants() {
+    }
+
+    /**
+     * @methodtype assertion
+     */
+    protected void assertIsValidDouble(double val){
+       if (Double.isInfinite(val) || Double.isNaN(val))
+           throw new IllegalArgumentException("val is not a valid double.");
+    }
+
+
+
+
+
+
 
 }

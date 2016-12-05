@@ -27,6 +27,11 @@ public class SphericCoordinate extends AbstractCoordinate{
 
     public SphericCoordinate(double latitude, double longitude, double radius) throws
             IllegalArgumentException {
+
+        assertValidLat(latitude);
+        assertValidLong(longitude);
+        assertValidRadius(radius);
+
         if (Math.abs(latitude) > 90 || Math.abs(longitude) > 180 || radius < 0 )
             throw new IllegalArgumentException();
 
@@ -82,23 +87,32 @@ public class SphericCoordinate extends AbstractCoordinate{
      * @methodtype helper
      */
     private double calcX(){
-        return this.radius*Math.sin(Math.toRadians(this.latitude))*
+        double ret = this.radius*Math.sin(Math.toRadians(this.latitude))*
                 Math.cos(Math.toRadians(this.longitude));
+
+        assertClassInvariants();
+        return ret;
     }
     /**
      *
      * @methodtype helper
      */
     private double calcY(){
-        return this.radius*Math.sin(Math.toRadians(this.latitude))*
+        double ret = this.radius*Math.sin(Math.toRadians(this.latitude))*
                 Math.sin(Math.toRadians(this.longitude));
+
+        assertClassInvariants();
+
+        return ret;
     }
     /**
      *
      * @methodtype helper
      */
     private double calcZ(){
-        return this.radius*Math.cos(Math.toRadians(this.latitude));
+        double ret = this.radius*Math.cos(Math.toRadians(this.latitude));
+        assertClassInvariants();
+        return ret;
     }
 
 
@@ -109,17 +123,26 @@ public class SphericCoordinate extends AbstractCoordinate{
     @Override
     public double getDistance(Coordinate otherPoint) {
         assertNotNull(otherPoint);
+
+        double ret = -1;
+
         //if otherPoint is a spheric coordinate:
         //  -- test for radius, if equal: return circular distance
         if (otherPoint instanceof SphericCoordinate) {
             SphericCoordinate other = (SphericCoordinate) otherPoint;
             if (other.getRadius() == this.radius) {
-                return this.doGetDistance(other);
+
+                ret = this.doGetDistance(other);
             }
         }
 
         //all other cases: return direct distance
-        return super.getDistance(otherPoint);
+        if (ret == -1)
+            ret = super.getDistance(otherPoint);
+
+        assert ret > 0;
+        assertClassInvariants();
+        return ret;
     }
 
 
@@ -134,6 +157,8 @@ public class SphericCoordinate extends AbstractCoordinate{
      *
      */
     protected double doGetDistance(SphericCoordinate otherPoint){
+
+
         double radLongitude = Math.toRadians(this.longitude);
         double radOtherLongitude = Math.toRadians(otherPoint.getLongitude());
         double radLatitude = Math.toRadians(this.latitude);
@@ -161,6 +186,45 @@ public class SphericCoordinate extends AbstractCoordinate{
         double distance = radius*deltaSigma;
 
         return distance;
+    }
+
+    /**
+     * @methodtype assertion
+     */
+
+    private void assertValidLat(double latitude) throws IllegalArgumentException{
+        assertIsValidDouble(latitude);
+        if (Math.abs(latitude) > 90)
+            throw new IllegalArgumentException("Absolute latitude may not be greater than 90 degree!");
+    }
+
+
+    /**
+     * @methodtype assertion
+     */
+    private void assertValidLong(double longitude) throws IllegalArgumentException{
+        assertIsValidDouble(longitude);
+        if (Math.abs(longitude) > 180)
+            throw new IllegalArgumentException("Absolute longitude may not be greater than 180 degree!");
+    }
+
+    /**
+     * @methodtype assertion
+     */
+    private void assertValidRadius(double radius) throws IllegalArgumentException{
+        assertIsValidDouble(radius);
+        if (radius < 0)
+            throw new IllegalArgumentException("Radius must be greater 0!");
+    }
+
+    /**
+     * @methodtype assertion
+     */
+    @Override
+    protected void assertClassInvariants(){
+        assertValidLat(this.latitude);
+        assertValidLong(this.longitude);
+        assertValidRadius(this.radius);
     }
 
 
