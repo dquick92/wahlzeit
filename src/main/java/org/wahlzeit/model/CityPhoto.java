@@ -60,6 +60,7 @@ public class CityPhoto extends Photo {
      * @methodtype set
      */
     public void setCityName ( String cityName){
+        assertStringNotNull(cityName, "cityName");
         this.cityName = cityName;
     }
 
@@ -85,6 +86,7 @@ public class CityPhoto extends Photo {
      * @methodtype set
      */
     public void setCountry(String country) {
+        assertStringNotNull(country, "country");
         this.country = country;
     }
 
@@ -101,6 +103,8 @@ public class CityPhoto extends Photo {
      * @methodtype set
      */
     public void setCityType(CityType cityType) {
+        if(cityType == null)
+            throw new IllegalArgumentException("The argument cityType must not be null!");
         this.cityType = cityType;
     }
 
@@ -117,6 +121,9 @@ public class CityPhoto extends Photo {
      * @methodtype set
      */
     public void setCityCulture(CityCulture[] cityCulture) {
+        if(cityCulture == null)
+            throw new IllegalArgumentException("The argument cityType must not be null!");
+
         this.cityCulture = cityCulture;
     }
 
@@ -133,6 +140,8 @@ public class CityPhoto extends Photo {
      * @methodtype set
      */
     public void setPopulation(long population) {
+        if (population <= 0)
+            throw new IllegalArgumentException("A cities population cannot be smaller than 0!");
         this.population = population;
     }
 
@@ -141,6 +150,7 @@ public class CityPhoto extends Photo {
      * @methodtype factory
      */
     public boolean addPointOfInterest(String name){
+        assertStringNotNull(name, "name");
         return this.pointsOfInterest.add(name);
     }
 
@@ -149,6 +159,7 @@ public class CityPhoto extends Photo {
      * @methodtype factory
      */
     public boolean removePointOfInterest(String name){
+        assertStringNotNull(name, "name");
         return this.pointsOfInterest.remove(name);
     }
 
@@ -159,4 +170,10 @@ public class CityPhoto extends Photo {
     public LinkedList<String> getPointsOfInterest(){
         return this.pointsOfInterest;
     }
+
+    private void assertStringNotNull(String strToTest, String arg){
+        if (strToTest == null)
+            throw new IllegalArgumentException("The argument "+ arg + " must not be null!");
+    }
+
 }

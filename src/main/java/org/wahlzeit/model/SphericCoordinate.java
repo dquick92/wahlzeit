@@ -32,39 +32,35 @@ public class SphericCoordinate extends AbstractCoordinate{
         assertValidLong(longitude);
         assertValidRadius(radius);
 
-        if (Math.abs(latitude) > 90 || Math.abs(longitude) > 180 || radius < 0 )
-            throw new IllegalArgumentException();
-
         this.latitude = latitude;
         this.longitude = longitude;
         this.radius = radius;
+
+        assertClassInvariants();
     }
 
     public double getLatitude(){
         return this.latitude;
     }
 
-    public void setLatitude(double latitude) throws IllegalArgumentException{
-        if (Math.abs(latitude) > 90)
-            throw new IllegalArgumentException();
-
+    public void setLatitude(double latitude){
+        assertValidLat(latitude);
         this.latitude = latitude;
+
     }
 
     public double getLongitude(){
         return this.longitude;
     }
 
-    public void setLongitude(double longitude) throws IllegalArgumentException {
-        if (Math.abs(longitude) > 90)
-            throw new IllegalArgumentException();
+    public void setLongitude(double longitude){
+        assertValidLong(longitude);
         this.longitude = longitude;
     }
 
-    public void setRadius(double radius) throws IllegalArgumentException {
-        if (radius < 0)
-            throw new IllegalArgumentException();
+    public void setRadius(double radius){
 
+        assertValidRadius(radius);
         this.radius = radius;
     }
 
@@ -90,7 +86,6 @@ public class SphericCoordinate extends AbstractCoordinate{
         double ret = this.radius*Math.sin(Math.toRadians(this.latitude))*
                 Math.cos(Math.toRadians(this.longitude));
 
-        assertClassInvariants();
         return ret;
     }
     /**
@@ -101,8 +96,6 @@ public class SphericCoordinate extends AbstractCoordinate{
         double ret = this.radius*Math.sin(Math.toRadians(this.latitude))*
                 Math.sin(Math.toRadians(this.longitude));
 
-        assertClassInvariants();
-
         return ret;
     }
     /**
@@ -111,7 +104,6 @@ public class SphericCoordinate extends AbstractCoordinate{
      */
     private double calcZ(){
         double ret = this.radius*Math.cos(Math.toRadians(this.latitude));
-        assertClassInvariants();
         return ret;
     }
 
@@ -140,7 +132,7 @@ public class SphericCoordinate extends AbstractCoordinate{
         if (ret == -1)
             ret = super.getDistance(otherPoint);
 
-        assert ret > 0;
+        assert ret >= 0;
         assertClassInvariants();
         return ret;
     }

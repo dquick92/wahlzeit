@@ -66,25 +66,23 @@ public abstract class AbstractCoordinate implements Coordinate,Serializable{
     /**
      * @methodtype assertion
      */
-    protected void assertNotNull(Coordinate coord) throws IllegalArgumentException{
+    protected void assertNotNull(Coordinate coord) throws NullPointerException{
         if (coord == null)
-            throw new IllegalArgumentException("The argument must not be null!");
+            throw new NullPointerException("The argument coord must not be null!");
     }
 
     /**
      * @methodtype assertion
      */
-    protected void assertClassInvariants() {
-    }
+    protected abstract void assertClassInvariants();
 
     /**
      * @methodtype assertion
      */
     protected void assertIsValidDouble(double val){
        if (Double.isInfinite(val) || Double.isNaN(val))
-           throw new IllegalArgumentException("val is not a valid double.");
+           throw new IllegalArgumentException("The number " + val +" is not a valid double.");
     }
-
 
 
 

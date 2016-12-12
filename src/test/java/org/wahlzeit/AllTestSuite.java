@@ -40,6 +40,7 @@ public final class AllTestSuite {
         suite.addTest(new JUnit4TestAdapter(StringUtilTest.class));
         suite.addTest(new JUnit4TestAdapter(VersionTest.class));
         suite.addTest(new JUnit4TestAdapter(AbstractCoordinateTest.class));
+        suite.addTest(new JUnit4TestAdapter(CartesianCoordinateTest.class));
 
         return suite;
     }

@@ -11,7 +11,7 @@ public class AbstractCoordinateTest {
     CartesianCoordinate cC;
     SphericCoordinate sC;
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testIsEqualWithNull(){
         cC = new CartesianCoordinate(0,0,0);
         assertTrue(cC.isEqual(null));
@@ -54,7 +54,7 @@ public class AbstractCoordinateTest {
         assertEquals(5, sC.getDistance(cC), 0.1);
     }
 
-    @Test(expected=NullPointerException.class)
+    @Test(expected=IllegalArgumentException.class)
     public void testGetDistanceWithNull(){
         cC = new CartesianCoordinate(0,0,0);
         cC.getDistance(null);
