@@ -1,7 +1,6 @@
 package org.wahlzeit.model;
 
-
-
+import org.wahlzeit.utils.Cache;
 
 import java.util.Vector;
 
@@ -14,18 +13,21 @@ public class SphericCoordinate extends AbstractCoordinate{
 
     public static final int EARTH_RADIUS = 6371;
 
+    private static Cache<SphericCoordinate> storage = new Cache<SphericCoordinate>();
 
     private double latitude;
     private double longitude;
     private double radius;
 
-    public SphericCoordinate(){
-        latitude = 0.0;
-        longitude = 0.0;
-        radius = EARTH_RADIUS;
+    public static SphericCoordinate getInstance(double latitude, double longitude){
+        return storage.find(new SphericCoordinate(latitude, longitude, EARTH_RADIUS));
     }
 
-    public SphericCoordinate(double latitude, double longitude, double radius) throws
+    public static SphericCoordinate getInstance(double latitude, double longitude, double radius){
+        return storage.find(new SphericCoordinate(latitude, longitude, radius));
+    }
+
+    private SphericCoordinate(double latitude, double longitude, double radius) throws
             IllegalArgumentException {
 
         assertValidLat(latitude);
@@ -35,8 +37,6 @@ public class SphericCoordinate extends AbstractCoordinate{
         this.latitude = latitude;
         this.longitude = longitude;
         this.radius = radius;
-
-        assertClassInvariants();
     }
 
     public double getLatitude(){

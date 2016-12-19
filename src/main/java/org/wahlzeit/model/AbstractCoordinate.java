@@ -40,6 +40,27 @@ public abstract class AbstractCoordinate implements Coordinate,Serializable{
         return ret;
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if (obj == null) return false;
+        if (obj == this) return true;
+
+        if (!(obj instanceof AbstractCoordinate)) return false;
+
+        AbstractCoordinate c = (AbstractCoordinate)obj;
+
+        if (!assertEqualHashCode(c)) return false;
+
+        return this.isEqual(c);
+    }
+
+    @Override
+    public int hashCode(){
+        Vector<Double> v = this.asVector();
+        return (""+v.get(0)+v.get(1)+v.get(2)).hashCode();
+    }
+
+
     /**
      *
      * @return coordinate as Vector Interpretation
@@ -84,7 +105,9 @@ public abstract class AbstractCoordinate implements Coordinate,Serializable{
            throw new IllegalArgumentException("The number " + val +" is not a valid double.");
     }
 
-
+    private boolean assertEqualHashCode(AbstractCoordinate c){
+        return (this.hashCode() == c.hashCode());
+    }
 
 
 

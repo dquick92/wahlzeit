@@ -5,14 +5,10 @@ import junit.framework.TestSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.AllTests;
 import org.wahlzeit.model.*;
-import org.wahlzeit.model.persistence.AbstractAdapterTest;
-import org.wahlzeit.model.persistence.DatastoreAdapterTest;
-import org.wahlzeit.model.persistence.GcsAdapterTest;
-import org.wahlzeit.services.EmailAddressTest;
-import org.wahlzeit.services.LogBuilderTest;
-import org.wahlzeit.services.mailing.EmailServiceTest;
-import org.wahlzeit.utils.StringUtilTest;
-import org.wahlzeit.utils.VersionTest;
+import org.wahlzeit.model.persistence.*;
+import org.wahlzeit.services.*;
+import org.wahlzeit.services.mailing.*;
+import org.wahlzeit.utils.*;
 
 @RunWith(AllTests.class)
 public final class AllTestSuite {
@@ -41,6 +37,7 @@ public final class AllTestSuite {
         suite.addTest(new JUnit4TestAdapter(VersionTest.class));
         suite.addTest(new JUnit4TestAdapter(AbstractCoordinateTest.class));
         suite.addTest(new JUnit4TestAdapter(CartesianCoordinateTest.class));
+        suite.addTest(new JUnit4TestAdapter(CacheTest.class));
 
         return suite;
     }

@@ -16,7 +16,7 @@ public class LocationTest {
 
     @Before
     public void setTmpCoordinate() throws IllegalArgumentException {
-        tmpCoordinate = new SphericCoordinate(5.4321, 5.1234, SphericCoordinate.EARTH_RADIUS);
+        tmpCoordinate = SphericCoordinate.getInstance(5.4321, 5.1234, SphericCoordinate.EARTH_RADIUS);
     }
 
     @Test
@@ -27,6 +27,6 @@ public class LocationTest {
         assertEquals(0, tmpLocation.getDistance(tmpLocation), 0);
 
         //different Locations, must be > 0
-        assertTrue(tmpLocation.getDistance(new Location(new SphericCoordinate(0.0, 0.0, SphericCoordinate.EARTH_RADIUS))) > 0);
+        assertTrue(tmpLocation.getDistance(new Location(SphericCoordinate.getInstance(0.0, 0.0, SphericCoordinate.EARTH_RADIUS))) > 0);
     }
 }
