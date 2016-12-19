@@ -43,25 +43,8 @@ public class SphericCoordinate extends AbstractCoordinate{
         return this.latitude;
     }
 
-    public void setLatitude(double latitude){
-        assertValidLat(latitude);
-        this.latitude = latitude;
-
-    }
-
     public double getLongitude(){
         return this.longitude;
-    }
-
-    public void setLongitude(double longitude){
-        assertValidLong(longitude);
-        this.longitude = longitude;
-    }
-
-    public void setRadius(double radius){
-
-        assertValidRadius(radius);
-        this.radius = radius;
     }
 
     public double getRadius(){ return this.radius; }
