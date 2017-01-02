@@ -38,6 +38,11 @@ import java.util.logging.Logger;
  * Adapter for the Google Datastore. Use default constructor to create an instance.
  * 
  * @review
+ *
+ * @patternInstance(
+ *     patternName = "Adapter"
+ *     participants = {"Adapter"}
+ * )
  */
 public class DatastoreAdapter extends ImageStorage {
 

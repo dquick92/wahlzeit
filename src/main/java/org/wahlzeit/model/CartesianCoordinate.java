@@ -4,6 +4,13 @@ import org.wahlzeit.utils.Cache;
 
 import java.util.Vector;
 
+/**
+ * @patternInstance(
+ *     patternName = "ValueObject"
+ *     participants = {"ValueObject"}
+ * )
+ */
+
 public class CartesianCoordinate extends AbstractCoordinate {
 
     private static Cache<CartesianCoordinate> storage = new Cache<CartesianCoordinate>();
