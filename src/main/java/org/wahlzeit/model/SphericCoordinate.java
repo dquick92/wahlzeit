@@ -15,9 +15,9 @@ public class SphericCoordinate extends AbstractCoordinate{
 
     private static Cache<SphericCoordinate> storage = new Cache<SphericCoordinate>();
 
-    private double latitude;
-    private double longitude;
-    private double radius;
+    private final double latitude;
+    private final double longitude;
+    private final double radius;
 
     public static SphericCoordinate getInstance(double latitude, double longitude){
         return storage.find(new SphericCoordinate(latitude, longitude, EARTH_RADIUS));

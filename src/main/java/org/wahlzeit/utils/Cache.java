@@ -11,14 +11,14 @@ import java.util.Map;
  */
 public class Cache<T> {
 
-    private Map<Integer,T> valueMap = Collections.synchronizedMap(new HashMap<Integer,T>());
+    private Map<T,T> valueMap = Collections.synchronizedMap(new HashMap<T,T>());
 
     public T find(T obj) {
 
-        T item = valueMap.get(obj.hashCode());
+        T item = valueMap.get(obj);
 
         if (item == null) {
-            valueMap.put(obj.hashCode(), obj);
+            valueMap.put(obj, obj);
             return obj;
         }
         return item;

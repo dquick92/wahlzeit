@@ -8,7 +8,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 
     private static Cache<CartesianCoordinate> storage = new Cache<CartesianCoordinate>();
 
-    private double x = 0, y = 0, z = 0;
+    private final double x, y, z;
 
 
     public static CartesianCoordinate getInstance(double x, double y, double z){

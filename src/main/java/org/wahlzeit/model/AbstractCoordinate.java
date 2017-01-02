@@ -43,15 +43,16 @@ public abstract class AbstractCoordinate implements Coordinate,Serializable{
     @Override
     public boolean equals(Object obj){
         if (obj == null) return false;
-        if (obj == this) return true;
 
         if (!(obj instanceof AbstractCoordinate)) return false;
 
         AbstractCoordinate c = (AbstractCoordinate)obj;
 
-        if (!assertEqualHashCode(c)) return false;
+        for (int i = 0; i < 3; i++)
+            if (this.asVector().get(i) != c.asVector().get(i))
+                return false;
 
-        return this.isEqual(c);
+        return true;
     }
 
     @Override
@@ -104,11 +105,6 @@ public abstract class AbstractCoordinate implements Coordinate,Serializable{
        if (Double.isInfinite(val) || Double.isNaN(val))
            throw new IllegalArgumentException("The number " + val +" is not a valid double.");
     }
-
-    private boolean assertEqualHashCode(AbstractCoordinate c){
-        return (this.hashCode() == c.hashCode());
-    }
-
 
 
 
