@@ -1,9 +1,14 @@
 package org.wahlzeit.model;
 
 import com.googlecode.objectify.annotation.Subclass;
+import org.wahlzeit.utils.PatternInstance;
 
 import java.util.LinkedList;
 
+@PatternInstance(
+        patternName = "Abstract Factory",
+        participants = {"ConcreteProduct"}
+)
 @Subclass
 public class CityPhoto extends Photo {
 

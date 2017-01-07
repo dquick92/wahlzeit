@@ -1,16 +1,15 @@
 package org.wahlzeit.model;
 
 import org.wahlzeit.utils.Cache;
+import org.wahlzeit.utils.PatternInstance;
 
 import java.util.Vector;
 
-/**
- * @patternInstance(
- *     patternName = "ValueObject"
- *     participants = {"ValueObject"}
- * )
- */
 
+@PatternInstance(
+    patternName = "ValueObject",
+    participants = {"ValueObject"}
+)
 public class CartesianCoordinate extends AbstractCoordinate {
 
     private static Cache<CartesianCoordinate> storage = new Cache<CartesianCoordinate>();
