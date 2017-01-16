@@ -21,8 +21,6 @@ public class CityPhoto extends Photo {
      */
     public CityPhoto(){
         super();
-        city = CityManager.getInstance().createCity("defaultCity", "defaultCity",
-                CityType.CitySize.CITY, CityType.CityCulture.BUSINESS_CITY);
     }
 
     /**
@@ -31,8 +29,6 @@ public class CityPhoto extends Photo {
      */
     public CityPhoto(PhotoId myId) {
         super(myId);
-        city = CityManager.getInstance().createCity("defaultCity", "defaultCity",
-                CityType.CitySize.CITY, CityType.CityCulture.BUSINESS_CITY);
     }
 
     /**
