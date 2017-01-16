@@ -54,6 +54,9 @@ public abstract class ModelMain extends AbstractMain {
 		log.config(LogBuilder.createSystemMessage().addAction("load user").toString());
 		UserManager.getInstance().init();
 
+		log.config(LogBuilder.createSystemMessage().addAction("load cities").toString());
+		CityManager.getInstance().init();
+
 		log.config(LogBuilder.createSystemMessage().addAction("init PhotoFactory").toString());
 		CityPhotoFactory.initialize();
 
